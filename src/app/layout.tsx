@@ -13,10 +13,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Aura Services Demo — Πίνακας Πωλήσεων",
   description:
     "Διαδραστική demo πίνακα πωλήσεων από την Aura Services. Εξερευνήστε αναλυτικά Πωλητών, γραμμές πωλήσεων και εξαγωγές PDF.",
+  openGraph: {
+    title: "Aura Services Demo — Πίνακας Πωλήσεων",
+    description:
+      "Διαδραστική demo πίνακα πωλήσεων από την Aura Services. Εξερευνήστε αναλυτικά Πωλητών, γραμμές πωλήσεων και εξαγωγές PDF.",
+    images: [
+      {
+        url: "/image.png",
+        alt: "Aura Services seller dashboard preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aura Services Demo — Πίνακας Πωλήσεων",
+    description:
+      "Διαδραστική demo πίνακα πωλήσεων από την Aura Services. Εξερευνήστε αναλυτικά Πωλητών, γραμμές πωλήσεων και εξαγωγές PDF.",
+    images: ["/image.png"],
+  },
   icons: {
     icon: { url: "/icon", type: "image/png" },
     apple: { url: "/logo.svg", sizes: "180x180", type: "image/svg+xml" },
