@@ -30,6 +30,16 @@ function formatDate(delphiDay: number): string {
   });
 }
 
+function formatDateCompact(delphiDay: number): string {
+  const d = new Date(DELPHI_EPOCH + delphiDay * 86400000);
+  if (isNaN(d.getTime())) return String(delphiDay);
+  return d.toLocaleDateString("el-GR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+}
+
 function dateInputToDelphiDay(dateStr: string): number {
   const [y, m, d] = dateStr.split("-").map(Number);
   return Math.round((new Date(y, m - 1, d).getTime() - DELPHI_EPOCH) / 86400000);
@@ -481,33 +491,49 @@ export function SalesTable({ salesLines }: { salesLines: SalesLine[] }) {
 
       {/* ── Table ── */}
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full table-fixed md:table-auto">
+          <colgroup>
+            <col className="w-[13%] md:w-auto" />
+            <col className="w-[13%] md:w-auto" />
+            <col className="w-[21%] md:w-auto" />
+            <col className="w-[13%] md:w-auto" />
+            <col className="w-[25%] md:w-auto" />
+            <col className="w-[15%] md:w-auto" />
+          </colgroup>
           <thead>
             <tr className="border-b border-slate-800 bg-slate-800/40">
-              <th className="text-left px-6 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-widest whitespace-nowrap">
-                Ημ/νία Παραγγελίας
+              <th className="text-left px-1.5 md:px-6 py-2 md:py-3 text-[8px] md:text-[11px] font-semibold text-slate-500 uppercase tracking-normal md:tracking-widest leading-tight align-top">
+                <span className="block md:hidden">Ημ/νία</span>
+                <span className="hidden md:inline">Ημ/νία Παραγγελίας</span>
               </th>
-              <th className="text-left px-6 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-widest whitespace-nowrap">
-                Κωδικός Πελάτη
+              <th className="text-left px-1.5 md:px-6 py-2 md:py-3 text-[8px] md:text-[11px] font-semibold text-slate-500 uppercase tracking-normal md:tracking-widest leading-tight align-top">
+                <span className="block md:hidden">Κωδ.</span>
+                <span className="block md:hidden">Πελ.</span>
+                <span className="hidden md:inline">Κωδικός Πελάτη</span>
               </th>
-              <th className="text-left px-6 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">
-                Όνομα Πελάτη
+              <th className="text-left px-1.5 md:px-6 py-2 md:py-3 text-[8px] md:text-[11px] font-semibold text-slate-500 uppercase tracking-normal md:tracking-widest leading-tight align-top">
+                <span className="block md:hidden">Πελάτης</span>
+                <span className="hidden md:inline">Όνομα Πελάτη</span>
               </th>
-              <th className="text-left px-6 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-widest whitespace-nowrap">
-                Κωδικός Προϊόντος
+              <th className="text-left px-1.5 md:px-6 py-2 md:py-3 text-[8px] md:text-[11px] font-semibold text-slate-500 uppercase tracking-normal md:tracking-widest leading-tight align-top">
+                <span className="block md:hidden">Κωδ.</span>
+                <span className="block md:hidden">Προϊ.</span>
+                <span className="hidden md:inline">Κωδικός Προϊόντος</span>
               </th>
-              <th className="text-left px-6 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-widest">
-                Όνομα Προϊόντος
+              <th className="text-left px-1.5 md:px-6 py-2 md:py-3 text-[8px] md:text-[11px] font-semibold text-slate-500 uppercase tracking-normal md:tracking-widest leading-tight align-top">
+                <span className="block md:hidden">Προϊόν</span>
+                <span className="hidden md:inline">Όνομα Προϊόντος</span>
               </th>
-              <th className="text-right px-6 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-widest whitespace-nowrap">
-                Αξία
+              <th className="text-right px-1.5 md:px-6 py-2 md:py-3 text-[8px] md:text-[11px] font-semibold text-slate-500 uppercase tracking-normal md:tracking-widest leading-tight align-top">
+                <span className="block md:hidden">Αξία</span>
+                <span className="hidden md:inline">Αξία</span>
               </th>
             </tr>
           </thead>
           <tbody>
             {displayed.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-16 text-center text-slate-600 text-sm">
+                <td colSpan={6} className="px-6 py-16 text-center text-slate-600 text-sm">
                   {hasActiveFilters ? (
                     <span>Δεν βρέθηκαν αποτελέσματα για τα τρέχοντα φίλτρα</span>
                   ) : (
@@ -521,22 +547,29 @@ export function SalesTable({ salesLines }: { salesLines: SalesLine[] }) {
                   key={i}
                   className="border-b border-slate-800/60 hover:bg-slate-800/30 transition-colors last:border-none"
                 >
-                  <td className="px-6 py-3.5 text-sm text-slate-400 whitespace-nowrap">
-                    {line.trndate_line ? formatDate(line.trndate_line) : "—"}
+                  <td className="px-1.5 md:px-6 py-2 md:py-3.5 text-[9px] md:text-sm text-slate-400 whitespace-nowrap">
+                    {line.trndate_line ? (
+                      <>
+                        <span className="md:hidden">{formatDateCompact(line.trndate_line)}</span>
+                        <span className="hidden md:inline">{formatDate(line.trndate_line)}</span>
+                      </>
+                    ) : (
+                      "—"
+                    )}
                   </td>
-                  <td className="px-6 py-3.5 text-sm font-mono font-semibold text-blue-700 dark:text-blue-400 whitespace-nowrap">
+                  <td className="px-1.5 md:px-6 py-2 md:py-3.5 text-[9px] md:text-sm font-mono font-semibold text-blue-700 dark:text-blue-400 whitespace-nowrap">
                     {line.customer_code}
                   </td>
-                  <td className="px-6 py-3.5 text-sm text-slate-300">
+                  <td className="px-1.5 md:px-6 py-2 md:py-3.5 text-[9px] md:text-sm text-slate-300 leading-tight wrap-break-word">
                     {line.customer_name}
                   </td>
-                  <td className="px-6 py-3.5 text-sm font-mono text-slate-400 whitespace-nowrap">
+                  <td className="px-1.5 md:px-6 py-2 md:py-3.5 text-[9px] md:text-sm font-mono text-slate-400 whitespace-nowrap">
                     {line.item_code}
                   </td>
-                  <td className="px-6 py-3.5 text-sm text-slate-300">
+                  <td className="px-1.5 md:px-6 py-2 md:py-3.5 text-[9px] md:text-sm text-slate-300 leading-tight wrap-break-word">
                     {line.item_name}
                   </td>
-                  <td className="px-6 py-3.5 text-sm font-mono font-semibold text-right whitespace-nowrap text-emerald-700 dark:text-emerald-400">
+                  <td className="px-1.5 md:px-6 py-2 md:py-3.5 text-[9px] md:text-sm font-mono font-semibold text-right whitespace-nowrap text-emerald-700 dark:text-emerald-400">
                     {line.line_value != null ? fmtCurrency(line.line_value) : "—"}
                   </td>
                 </tr>
