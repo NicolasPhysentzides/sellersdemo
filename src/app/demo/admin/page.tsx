@@ -367,30 +367,31 @@ export default function DemoAdminPage() {
 
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <Image
               src="/logo.svg"
               alt="Aura Services"
-              width={96}
-              height={96}
-              className="rounded-xl mt-1"
+              width={72}
+              height={72}
+              className="rounded-xl mt-1 w-10 h-10 sm:w-14 sm:h-14"
             />
-            <span className="font-semibold text-white tracking-tight">
+            <span className="font-semibold text-sm sm:text-base text-white tracking-tight truncate">
               Aura Services
             </span>
             <span className="text-slate-600 hidden sm:inline">/</span>
-            <span className="text-slate-500 text-sm hidden sm:inline">
+            <span className="text-slate-500 text-sm hidden md:inline">
               Πλατφόρμα Διαχείρισης
             </span>
           </div>
           <div className="flex items-center gap-2">
             <Link
               href="/demo"
-              className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-200 dark:hover:text-white transition-colors border border-slate-700/60 hover:border-slate-600 px-3.5 py-1.5 rounded-xl"
+              aria-label="Πίσω"
+              className="flex items-center justify-center md:justify-start gap-0 md:gap-1.5 text-slate-400 hover:text-slate-200 dark:hover:text-white transition-colors border border-slate-700/60 hover:border-slate-600 w-8 h-8 md:w-auto md:h-auto md:px-3.5 py-0 md:py-1.5 rounded-md md:rounded-xl"
             >
               <svg
-                className="w-4 h-4"
+                className="w-3.5 h-3.5 md:w-4 md:h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -402,7 +403,7 @@ export default function DemoAdminPage() {
                   d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 />
               </svg>
-              Πίσω
+              <span className="hidden md:inline text-sm">Πίσω</span>
             </Link>
             <ThemeToggle />
           </div>
