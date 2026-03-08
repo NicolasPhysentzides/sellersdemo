@@ -16,35 +16,35 @@ const geistMono = Geist_Mono({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://sellerdemo.theauraservices.com";
+const metaTitle = "Seller Dashboard Demo | Aura Services";
+const metaDescription =
+  "Interactive seller dashboard demo with sales transactions, KPI insights, admin overview, and PDF export by Aura Services.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },
-  title: "Aura Services Demo — Πίνακας Πωλήσεων",
-  description:
-    "Διαδραστική demo πίνακα πωλήσεων από την Aura Services. Εξερευνήστε αναλυτικά Πωλητών, γραμμές πωλήσεων και εξαγωγές PDF.",
+  title: metaTitle,
+  description: metaDescription,
   openGraph: {
     url: "/",
-    siteName: "Aura Services Demo",
-    title: "Aura Services Demo — Πίνακας Πωλήσεων",
-    description:
-      "Διαδραστική demo πίνακα πωλήσεων από την Aura Services. Εξερευνήστε αναλυτικά Πωλητών, γραμμές πωλήσεων και εξαγωγές PDF.",
+    siteName: "Seller Dashboard Demo",
+    title: metaTitle,
+    description: metaDescription,
     images: [
       {
         url: "/image.png",
         width: 1024,
         height: 576,
-        alt: "Aura Services seller dashboard preview",
+        alt: "Seller Dashboard Demo preview by Aura Services",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aura Services Demo — Πίνακας Πωλήσεων",
-    description:
-      "Διαδραστική demo πίνακα πωλήσεων από την Aura Services. Εξερευνήστε αναλυτικά Πωλητών, γραμμές πωλήσεων και εξαγωγές PDF.",
+    title: metaTitle,
+    description: metaDescription,
     images: ["/image.png"],
   },
   icons: {
