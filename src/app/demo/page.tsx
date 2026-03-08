@@ -127,7 +127,7 @@ export default function DemoPage() {
                 </svg>
               </div>
               <h2 className="font-bold text-white text-xl mb-2">
-                Πίνακας Πωλητή
+                Πλατφόρμα Πωλητή
               </h2>
               <p className="text-slate-400 text-base leading-relaxed mb-5">
                 Δείτε γραμμές πωλήσεων, φιλτράρετε συναλλαγές και εξάγετε αναφορές
