@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/*
+ * Dark mode variant: activated by the .dark class that next-themes sets on
+ * <html> before first paint (via its inline script). CSS custom properties
+ * below handle the pre-hydration / no-JS case via @media (prefers-color-scheme).
+ */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ── Shared custom-property sets ────────────────────────────────────────── */
+@layer base {
+  /* Light variables — the unconditional default */
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+
+    --color-slate-950: #f8fafc;
+    --color-slate-900: #f1f5f9;
+    --color-slate-800: #e2e8f0;
+    --color-slate-700: #cbd5e1;
+    --color-slate-600: #94a3b8;
+    --color-slate-500: #64748b;
+    --color-slate-400: #475569;
+    --color-slate-300: #334155;
+    --color-slate-200: #1e293b;
+
+    --color-sky-950: #f0f9ff;
+    --color-sky-900: #e0f2fe;
+    --color-sky-800: #bae6fd;
+
+    --chart-grid-stroke: #e2e8f0;
+    --chart-dot-inactive: #e2e8f0;
+    --chart-tooltip-bg: #ffffff;
+    --chart-tooltip-border: #cbd5e1;
+    --chart-tooltip-text: #1e293b;
+    --chart-label-inactive: #94a3b8;
+    --chart-label-active: #475569;
+  }
+
+  /* Dark variables — activated by OS preference (no class yet) */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+      --background: #020617;
+      --foreground: #ededed;
+
+      --color-slate-950: #020617;
+      --color-slate-900: #0f172a;
+      --color-slate-800: #1e293b;
+      --color-slate-700: #334155;
+      --color-slate-600: #475569;
+      --color-slate-500: #64748b;
+      --color-slate-400: #94a3b8;
+      --color-slate-300: #cbd5e1;
+      --color-slate-200: #e2e8f0;
+
+      --color-sky-950: #172554;
+      --color-sky-900: #0c4a6e;
+      --color-sky-800: #075985;
+
+      --chart-grid-stroke: #1e293b;
+      --chart-dot-inactive: #0f172a;
+      --chart-tooltip-bg: #0f172a;
+      --chart-tooltip-border: #334155;
+      --chart-tooltip-text: #e2e8f0;
+      --chart-label-inactive: #475569;
+      --chart-label-active: #94a3b8;
+    }
+  }
+
+  /* Explicit .dark class — overrides OS preference */
+  :root.dark {
+    --background: #020617;
+    --foreground: #ededed;
+
+    --color-slate-950: #020617;
+    --color-slate-900: #0f172a;
+    --color-slate-800: #1e293b;
+    --color-slate-700: #334155;
+    --color-slate-600: #475569;
+    --color-slate-500: #64748b;
+    --color-slate-400: #94a3b8;
+    --color-slate-300: #cbd5e1;
+    --color-slate-200: #e2e8f0;
+
+    --color-sky-950: #172554;
+    --color-sky-900: #0c4a6e;
+    --color-sky-800: #075985;
+
+    --chart-grid-stroke: #1e293b;
+    --chart-dot-inactive: #0f172a;
+    --chart-tooltip-bg: #0f172a;
+    --chart-tooltip-border: #334155;
+    --chart-tooltip-text: #e2e8f0;
+    --chart-label-inactive: #475569;
+    --chart-label-active: #94a3b8;
+  }
+
+  /* Grid line colour token — used by .bg-grid below */
+  :root {
+    --grid-line: rgba(0, 0, 0, 0.055);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+      --grid-line: rgba(255, 255, 255, 0.12);
+    }
+  }
+  :root.dark  { --grid-line: rgba(255, 255, 255, 0.12); }
+  :root.light { --grid-line: rgba(0, 0, 0, 0.055); }
+
+  /* Explicit .light class — overrides OS preference */
+  :root.light {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+
+    --color-slate-950: #f8fafc;
+    --color-slate-900: #f1f5f9;
+    --color-slate-800: #e2e8f0;
+    --color-slate-700: #cbd5e1;
+    --color-slate-600: #94a3b8;
+    --color-slate-500: #64748b;
+    --color-slate-400: #475569;
+    --color-slate-300: #334155;
+    --color-slate-200: #1e293b;
+
+    --color-sky-950: #f0f9ff;
+    --color-sky-900: #e0f2fe;
+    --color-sky-800: #bae6fd;
+
+    --chart-grid-stroke: #e2e8f0;
+    --chart-dot-inactive: #e2e8f0;
+    --chart-tooltip-bg: #ffffff;
+    --chart-tooltip-border: #cbd5e1;
+    --chart-tooltip-text: #1e293b;
+    --chart-label-inactive: #94a3b8;
+    --chart-label-active: #475569;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ── Adaptive dot-grid background ──────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* ── Text-white adapts to light theme ──────────────────────────────────── */
+/* Explicit light class */
+:root.light .text-white {
+  color: #0f172a;
+}
+
+/* OS light preference fallback (no class set yet) */
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) .text-white {
+    color: #0f172a;
+  }
+}
+
+/* Exceptions: keep white text on colored (non-slate) backgrounds */
+:root.light .bg-blue-600,
+:root.light .bg-blue-600 .text-white,
+:root.light .bg-blue-600.text-white {
+  color: white;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) .bg-blue-600,
+  :root:not(.dark) .bg-blue-600 .text-white,
+  :root:not(.dark) .bg-blue-600.text-white {
+    color: white;
+  }
+}
