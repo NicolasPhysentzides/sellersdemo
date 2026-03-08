@@ -30,15 +30,15 @@ export const metadata: Metadata = {
   title: metaTitle,
   description: metaDescription,
   openGraph: {
-    url: "/",
+    url: "https://sellerdemo.theauraservices.com",
     siteName: "Seller Dashboard Demo",
     title: metaTitle,
     description: metaDescription,
     images: [
       {
-        url: "/image.png",
-        width: 1024,
-        height: 576,
+        url: "https://sellerdemo.theauraservices.com/image.png",
+        width: 1200,
+        height: 630,
         alt: "Seller Dashboard Demo preview by Aura Services",
       },
     ],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metaTitle,
     description: metaDescription,
-    images: ["/image.png"],
+    images: ["https://sellerdemo.theauraservices.com/image.png"],
   },
   icons: {
     icon: { url: "/icon", type: "image/png" },
