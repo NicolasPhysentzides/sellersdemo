@@ -177,7 +177,7 @@ export default function DemoPage() {
               </svg>
             </div>
             <h2 className="font-bold text-white text-xl mb-2">
-              Πλατφόρμα Διαχείρισης
+              Πλατφόρμα Διαχειριστή
             </h2>
             <p className="text-slate-400 text-base leading-relaxed mb-5">
               Διαχειριστείτε και τους 20 Πωλητές, δείτε επισκόπηση απόδοσης
